@@ -3,6 +3,13 @@
 
 int maxCycleCount(int n, int m)
 {   
+    if (n > m)
+    {
+        int temp = n;
+        n = m;
+        m = temp;
+    }
+    
     int maxCycle = 0;
 
     for (int i = n; i <= m; i++)
