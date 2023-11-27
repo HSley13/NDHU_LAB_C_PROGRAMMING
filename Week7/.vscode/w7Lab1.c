@@ -3,8 +3,7 @@
 
 int maxCycleCount(int n, int m)
 {   
-    int len = m - n + 1;
-    int values[len];
+    int maxCycle = 0;
 
     for (int i = n; i <= m; i++)
     {
@@ -19,13 +18,7 @@ int maxCycleCount(int n, int m)
             cycleLength++;
         }
 
-        values[i - n] = cycleLength;
-    }
-
-    int maxCycle = values[0];
-    for (int i = 1; i <= m - n; i++)
-    {
-        if (values[i] > maxCycle) maxCycle = values[i];
+        if (cycleLength > maxCycle) maxCycle = cycleLength;
     }
 
     return maxCycle;
@@ -35,12 +28,8 @@ int main(void)
 {
     int n, m;
 
-    while(1)
+    while(scanf("%d %d", &n, &m) == 2)
     {
-        scanf("%d %d", &n, &m);
-
-        if(n == EOF && m == EOF) break;
-
         printf("%d %d %d\n", n, m, maxCycleCount(n, m));
     }
 
