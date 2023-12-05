@@ -5,11 +5,11 @@ int maxCycleCount(int n, int m)
 {   
     if (n > m)
     {
-        int temp = n;
-        n = m;
-        m = temp;
+        n += m;
+        m = n - m;
+        n -= m;
     }
-    
+
     int maxCycle = 0;
 
     for (int i = n; i <= m; i++)
@@ -19,8 +19,7 @@ int maxCycleCount(int n, int m)
 
         while (current != 1)
         {
-            if (current % 2) current = 3 * current + 1;
-            else current /= 2;
+            current = (current % 2) ? 3 * current + 1 : current / 2;
 
             cycleLength++;
         }
@@ -43,3 +42,4 @@ int main(void)
     return 0;
 }
 
+ 
