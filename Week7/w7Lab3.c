@@ -17,9 +17,8 @@ int main()
         ll points[N][2]; //declare 2D array to store coordinates of points in the landscape
 
         //input coordinates of the landscape
-        for (int i = 0; i < n; i++) {
-            scanf("%lld%lld", &points[i][0], &points[i][1]);
-        }
+        for (int i = 0; i < n; i++) scanf("%lld%lld", &points[i][0], &points[i][1]);
+    
 
         // Sorting based on x-coordinates using bubble sort
         for (int i = 0; i < n - 1; i++) {
@@ -49,7 +48,7 @@ int main()
             if (points[i][1] > k) 
             {
                 double dis = sqrt(pow(points[i][0] - points[i + 1][0], 2) + pow(points[i][1] - points[i + 1][1], 2));
-                
+
                 ans += (points[i][1] - k) * dis / (points[i][1] - points[i + 1][1]);
             }
         }
