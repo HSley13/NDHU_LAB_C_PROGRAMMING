@@ -1,81 +1,75 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
 
-#define SIZE 50
-int storage[SIZE] = {0};
-int isStored = 0;
+#define SIZE 1000
 
-int checkAndStore(int number, int *storage, int *isStored) 
+typedef struct COURSES 
 {
-    for (int i = 0; i < *isStored; i++) 
-    {
-        if (storage[i] == number) return 1;    
-    }
+	int sid[SIZE];
+	int studentId[SIZE];
+	int courseId[SIZE];
+	int totalScore[SIZE];
+	int numGrades[SIZE];
 
-    storage[*isStored] = number;
-    (*isStored)++;
+} COURSES;
 
-    return 0;
+int numFailed(COURSES *course, int numCourses)
+{
+    int failed = 0;
+    double avgScore = 0;
+
+	for (int i = 0; i < numCourses; ++i)
+	{
+		avgScore = course->totalScore[i] / (double) course->numGrades[i];
+		failed = (avgScore < 60.0)? failed + 1: failed;
+	}
+
+    return failed;
 }
 
-void failed (int (*courses)[3][1], int (*scores)[2], int cRows, int sRows)
+int numStudentCount(COURSES *course, int numCourse)
 {
-    int numFailed = 0, numStudent = 0;
-
-    for (int i = 0; i < cRows; i++)
+    int num = 0;
+    for (int i = 0; i < numCourse; i++)
     {
-        int totalScore = 0;
-        int numCourses = 0;
+        scanf("%d %d %d", &course->sid[i], &course->studentId[i], &course->courseId[i]);
+        num++;
 
-        for (int j = 0; j < sRows; j++)
+        for (int j = 0; j < i - 1; j++)
         {
-            int SID = courses[i][0][0]; 
-            if (scores[j][0] == SID)
+            if (course->studentId[i] == course->studentId[j])
             {
-                totalScore += scores[j][1];  
-                numCourses++;
+                num--;
+                break;
             }
         }
-
-        if (numCourses > 0 && (totalScore / numCourses) < 60) numFailed++;
-
-        int currentStudentID = courses[i][1][0];
-        if (!checkAndStore(currentStudentID, storage, &isStored))  numStudent++; 
     }
 
-    printf("%d %d\n", numStudent, numFailed);
+    return num;
 }
 
 int main(void)
 {
-    int cRows, sRows;
-    int courses[SIZE][3][1];
-    int scores[SIZE][2];
+    int numCourses, numScores;
+    scanf("%d %d", &numCourses, &numScores);
 
-    while (scanf("%d %d", &cRows, &sRows) == 2)
+    COURSES course;
+    for (int i = 0; i < SIZE; i++)
     {
-        for (int i = 0; i < cRows; i++)
-        {
-           for (int j = 0; j < 3; j++)
-           {
-              for (int k = 0; k < 1; k++)
-              {
-                scanf("%d", &courses[i][j][k]);
-              }
-
-           }
-        }
-
-        for (int i = 0; i < sRows; i++)
-        {
-            for (int j = 0; j < 2; j++)
-            {
-                scanf("%d", &scores[i][j]);
-            }
-        }
-
-        failed(courses, scores, cRows, sRows);  
+        course.totalScore[i] = 0;
+        course.numGrades[i] = 0;
     }
+
+   int numStudent = numStudentCount(&course, numCourses);
+
+    int grade, sid;
+    for (int i = 0; i < numScores; i++)
+    {
+        scanf("%d %d",&sid, &grade);
+
+        course.totalScore[sid] += grade;
+        course.numGrades[sid]++;
+    }
+
+    printf("%d %d", numStudent, numFailed(&course, numCourses));
 
 }
