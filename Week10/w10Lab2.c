@@ -30,8 +30,8 @@ int main(void)
     Point p;
     scanf("%f, %f", &p.x, &p.y);
 
-    if (is_point_on_line(A, B, C, p.x, p.y)) printf ("YES");
+    if (is_point_on_line(A, B, C, p.x, p.y)) printf ("Yes\n");
 
-    else printf ("NO");
+    else printf ("No\n");
 
 }
