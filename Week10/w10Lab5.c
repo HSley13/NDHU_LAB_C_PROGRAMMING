@@ -11,11 +11,12 @@ int depth_first_search(int i, int j)
 {
     if (i < 0 || j < 0 || i >= ROWS || j >= COLS) return 0;
 
+    if (visited[i][j]) return 0;
+
     if (board[i][j] == 'O') return 1;
 
     if (board[i][j] == 'X') return 2;
 
-    if (visited[i][j]) return 0;
 
     int flag = 0;
     visited[i][j] = 1;

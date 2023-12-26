@@ -7,55 +7,47 @@ typedef struct
     char decimal[1000];
 } DeciVar;
 
-// A function to add two decimal values and store the result in a third variable
 void addDeci(DeciVar a, DeciVar b, DeciVar *c) 
 {
-  // Initialize the carry and the lengths of the parts
-    int carry = 0,szai = strlen(a.integer),szbi = strlen(b.integer),szad = strlen(a.decimal),szbd = strlen(b.decimal);
+    int len_a_int = strlen(a.integer), len_b_int = strlen(b.integer);
+    int len_a_dec = strlen(a.decimal), len_b_dec = strlen(b.decimal);
 
-  // Pad the shorter integer part with zeros on the left
-    while (szai < szbi) a.integer[szai++] = '0';
-    
-    while (szbi < szai) b.integer[szbi++] = '0';
+    while (len_a_int < len_b_int) a.integer[len_a_int++] = '0';
+    while (len_b_int < len_a_int) b.integer[len_b_int++] = '0';
     
 
-    a.integer[szai] = '\0';
-    b.integer[szbi] = '\0';
+    a.integer[len_a_int] = '\0';
+    b.integer[len_b_int] = '\0';
 
-  // Pad the shorter decimal part with zeros on the right
-    while (szad < szbd) a.decimal[szad++] = '0';
+    while (len_a_dec < len_b_dec) a.decimal[len_a_dec++] = '0';
+    while (len_b_dec < len_a_dec) b.decimal[len_b_dec++] = '0';
 
-    while (szbd < szad) b.decimal[szbd++] = '0';
+    a.decimal[len_a_dec] = '\0';
+    b.decimal[len_b_dec] = '\0';
 
-    a.decimal[szad] = '\0';
-    b.decimal[szbd] = '\0';
-
-  // Add the decimal parts from right to left
-    c->decimal[szad] = '\0';
-    while (szad--) 
+    int carry = 0;
+    c->decimal[len_a_dec] = '\0';
+    while (len_a_dec--) 
     {
-      int sum = (a.decimal[szad] - '0') + (b.decimal[szad] - '0') + carry;
+      int sum = (a.decimal[len_a_dec] - '0') + (b.decimal[len_a_dec] - '0') + carry;
       carry = sum / 10;
     	sum %= 10;
-      c->decimal[szad] = sum+ '0';
+      c->decimal[len_a_dec] = sum + '0';
     }
 
-    // Add the integer parts from right to left
-    c->integer[szai] = '\0';
-    while (szai--) 
+    c->integer[len_a_int] = '\0';
+    while (len_a_int--) 
     {
-      int sum = (a.integer[szai] - '0') + (b.integer[szai] - '0') + carry;
+      int sum = (a.integer[len_a_int] - '0') + (b.integer[len_a_int] - '0') + carry;
       carry = sum / 10;
       sum %= 10;
-      c->integer[szai] = sum  + '0';
+      c->integer[len_a_int] = sum  + '0';
     }
 
-    // If there is a final carry, shift the result to the right and insert the carry
     if (carry) 
     {
         int len = strlen(c->integer);
 
-        // Shift digits to the right
         for (int i = len; i > 0; --i) c->integer[i] = c->integer[i - 1];
     
         c->integer[0] = carry + '0';
@@ -65,13 +57,11 @@ void addDeci(DeciVar a, DeciVar b, DeciVar *c)
 }
 
 
-// A function to read a decimal value from the standard input and store it in a variable
 void readDeci(DeciVar *a) 
 {
     char input[2001];
     scanf("%s", input);
 
-    // Split the string by the decimal point and store the parts in the variable
     sscanf(input, "%[^.].%s", a->integer, a->decimal);
 }
 

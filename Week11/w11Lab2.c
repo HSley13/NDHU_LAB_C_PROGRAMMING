@@ -30,7 +30,7 @@ char *convertToDifferentBase(int dec, int base, char *result)
 
         index++; 
     }  
-    
     result[index] = '\0';    
+
     return result; 
 }

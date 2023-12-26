@@ -1,56 +1,65 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
-int sequence(int n, char* num)
+void generateLookAndSay(const char *prev, int N) 
 {
-    if(n == 1) 
+    if (N == 0) return;
+    
+    // Dynamically allocate memory for the result
+    char *result = (char *) malloc(2 * strlen(prev) + 1);
+
+    if (result == NULL) 
     {
-        printf("1\n"); 
-        num[0] = '1'; 
-        num[1] = '\0'; 
+        fprintf(stderr, "Memory allocation failed\n");
+        exit(EXIT_FAILURE);
+    }
 
-        return strlen(num); 
-    }  
-     
-    int size = sequence(n-1, num); 
-    int count = 0, j = 0;  
+    int count = 1;
+    char currentDigit = prev[0];
+    int resultIndex = 0;
 
-    char chr = num[0]; 
-    char new_num[size * 2];
-
-    for(int i = 0; i < size; i++)
+    for (int i = 1; prev[i] != '\0'; i++) 
     {
-        if(chr == num[i]) count++; 
-
-        else if(chr != num[i]) 
+        if (prev[i] == currentDigit) 
         {
-            new_num[j] = count + '0'; 
-            new_num[j+1] = chr;
+            count++;
+        } 
 
-            j+=2;  
-            count = 1; 
-            chr = num[i]; 
+        else 
+        {
+            // Append the count and currentDigit to the result
+            resultIndex += sprintf(result + resultIndex, "%d%c", count, currentDigit);
+
+            // Reset count and update currentDigit
+            count = 1;
+            currentDigit = prev[i];
         }
     }
 
-    new_num[j] = count + '0'; 
-    new_num[j+1] = chr; 
+    // Append the count and currentDigit for the last group
+    resultIndex += sprintf(result + resultIndex, "%d%c", count, currentDigit);
 
-    j += 2; 
-    new_num[j] = '\0'; 
+    result[resultIndex] = '\0';
 
-    strcpy(num, new_num); 
-    printf("%s\n", new_num); 
+    printf("%s\n", result);
 
-    return strlen(new_num); 
+    // Recursive call for the next term
+    generateLookAndSay(result, N - 1);
+
+    free(result);
 }
 
-int main(void) 
+int main() 
 {
-    int n = 0; 
-    scanf("%d", &n); 
+    int N;
+    scanf("%d", &N);
 
-    char num[100000];
-    sequence(n, num); 
+    // Handling the base case (N=0)
+    if (N >= 1) 
+    {
+        printf("1\n");
+        generateLookAndSay("1", N - 1);
+    }
+
+    return 0;
 }
