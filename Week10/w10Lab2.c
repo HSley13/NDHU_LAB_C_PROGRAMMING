@@ -33,5 +33,4 @@ int main(void)
     if (is_point_on_line(A, B, C, p.x, p.y)) printf ("Yes\n");
 
     else printf ("No\n");
-
 }

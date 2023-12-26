@@ -6,13 +6,13 @@
 
 int cols, rows = 0;
 
-bool inrange(int new_row, int new_column)
+bool in_range(int new_row, int new_column)
 {
   return new_row >= 0 && new_row < rows && new_column >= 0 && new_column < cols;
 }
 
 // Function to simulate one round of the game of life
-void simulateRound (char grid[MAX_ROWS][MAX_COLS], char new_grid[MAX_ROWS][MAX_COLS]) 
+void simulate_round (char grid[MAX_ROWS][MAX_COLS], char new_grid[MAX_ROWS][MAX_COLS]) 
 {
     int directions[8][2] = 
     {
@@ -32,7 +32,7 @@ void simulateRound (char grid[MAX_ROWS][MAX_COLS], char new_grid[MAX_ROWS][MAX_C
                 int new_row = i + directions[k][0];
                 int new_col = j + directions[k][1];
 
-                if (inrange(new_row, new_col) && grid[new_row][new_col] == '1') live_neighbors++;  
+                if (in_range(new_row, new_col) && grid[new_row][new_col] == '1') live_neighbors++;  
             }
 
             if (grid[i][j] == '1') 
@@ -52,7 +52,7 @@ void simulateRound (char grid[MAX_ROWS][MAX_COLS], char new_grid[MAX_ROWS][MAX_C
     }
 }
 
-void printGrid (char grid[MAX_ROWS][MAX_COLS]) 
+void print_grid (char grid[MAX_ROWS][MAX_COLS]) 
 {
     for (int i = 0; i < rows; ++i) 
     {
@@ -81,7 +81,7 @@ int main()
         char new_grid[MAX_ROWS][MAX_COLS];
 
         // Perform one round of the game of life
-        simulateRound(grid, new_grid);
+        simulate_round(grid, new_grid);
 
         // Copy the updated grid to the original grid for the next round
         for (int i = 0; i < rows; ++i) 
@@ -91,7 +91,7 @@ int main()
     }
 
     // Output the final state after simulation
-    printGrid(grid);
+    print_grid(grid);
 
     return 0;
 }

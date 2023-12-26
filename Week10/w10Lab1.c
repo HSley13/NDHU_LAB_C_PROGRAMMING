@@ -65,5 +65,4 @@ int main(void)
 
     put_in_order(list, n);
     top_3(list, n);
-
 }
