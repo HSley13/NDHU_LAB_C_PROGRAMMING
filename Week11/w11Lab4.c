@@ -2,7 +2,6 @@
 
 int eval (int *i, char *exp)
 {
-
   while (exp[*i] == ' ' || exp[*i] == '(' || exp[*i] == ')' || exp[*i] == ',') (*i) ++;
 
   if(exp[*i] == 'F')
@@ -25,7 +24,7 @@ int eval (int *i, char *exp)
       num = num + (exp[*i] - '0');
       (*i) ++;
     }
-
+    
     return num;
   }
 }

@@ -7,7 +7,7 @@ typedef struct
     char decimal[1000];
 } DeciVar;
 
-void addDeci(DeciVar a, DeciVar b, DeciVar *c) 
+void add_deci(DeciVar a, DeciVar b, DeciVar *c) 
 {
     int len_a_int = strlen(a.integer), len_b_int = strlen(b.integer);
     int len_a_dec = strlen(a.decimal), len_b_dec = strlen(b.decimal);
@@ -15,7 +15,6 @@ void addDeci(DeciVar a, DeciVar b, DeciVar *c)
     while (len_a_int < len_b_int) a.integer[len_a_int++] = '0';
     while (len_b_int < len_a_int) b.integer[len_b_int++] = '0';
     
-
     a.integer[len_a_int] = '\0';
     b.integer[len_b_int] = '\0';
 
@@ -53,11 +52,9 @@ void addDeci(DeciVar a, DeciVar b, DeciVar *c)
         c->integer[0] = carry + '0';
         c->integer[len + 1] = '\0';
     }
-
 }
 
-
-void readDeci(DeciVar *a) 
+void read_deci(DeciVar *a) 
 {
     char input[2001];
     scanf("%s", input);
@@ -65,7 +62,7 @@ void readDeci(DeciVar *a)
     sscanf(input, "%[^.].%s", a->integer, a->decimal);
 }
 
-void printDeci(DeciVar a) 
+void print_deci(DeciVar a) 
 {
     printf("%s", a.integer);
 
@@ -78,10 +75,10 @@ int main(void)
 {
     DeciVar a, b, c;
 
-    readDeci(&a);
-    readDeci(&b);
+    read_deci(&a);
+    read_deci(&b);
 
-    addDeci(a, b, &c);
+    add_deci(a, b, &c);
 
-    printDeci(c);
+    print_deci(c);
 }

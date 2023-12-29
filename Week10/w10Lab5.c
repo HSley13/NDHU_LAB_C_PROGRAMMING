@@ -17,7 +17,6 @@ int depth_first_search(int i, int j)
 
     if (board[i][j] == 'X') return 2;
 
-
     int flag = 0;
     visited[i][j] = 1;
 
@@ -29,7 +28,7 @@ int depth_first_search(int i, int j)
     return flag;
 }
 
-int main() 
+int main(void) 
 {
     int test_cases, i, j;
     scanf("%d", &test_cases);
@@ -59,8 +58,7 @@ int main()
                 else black_count++;
             }
         }
+        
         printf("Black %d White %d\n", black_count, white_count);
     }
-
-    return 0;
 }

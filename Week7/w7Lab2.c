@@ -8,7 +8,7 @@ int on_top[30];    // Tracks the top position in each stack
 // Function to reset block positions
 void init_place(int a)
 {
-int block, id = place_hol[a];
+    int block, id = place_hol[a];
 
     // Move blocks above 'a' back to their initial positions
     while (stack[id][on_top[id]] != a)
@@ -40,7 +40,7 @@ void pile(int a, int b)
     }
 }
 
-int main()
+int main(void)
 {
     int n, a, b;
     char oper[5], type[5];
@@ -48,7 +48,7 @@ int main()
     while (scanf("%d", &n) == 1)
     {
       // Initialize block positions and stacks
-      for (int i = 0; i < n; ++i)
+      for (int i = 0; i < n; i++)
       {
          stack[i][0] = i;    // Each block is initially in its own stack
          place_hol[i] = i;  // The block is initially in its own position
@@ -58,15 +58,15 @@ int main()
       while (scanf("%s", oper) && oper[0] != 'q')
       {
 
-          scanf("%d%s%d", &a, type, &b);
+          scanf("%d %s %d", &a, type, &b);
 
            // Checks if blocks are in the same position or the command is 'q'
           if (place_hol[a] == place_hol[b]) continue;
 
            // Moves block 'a' to its initial position if the command is 'm'
           if (oper[0] == 'm') init_place(a);
+
            // Moves block 'b' to its initial position if the type is 'n'
-           
           if (type[1] == 'n') init_place(b);
 
            // Pile blocks 'a' and 'b'
@@ -74,7 +74,7 @@ int main()
       }
 
         // Print the current arrangement of blocks
-      for (int i = 0; i < n; ++i)
+      for (int i = 0; i < n; i++)
       {
           printf("%d:", i);
 
@@ -86,5 +86,4 @@ int main()
       }
     }
 
-  return 0;
 }

@@ -46,12 +46,9 @@ void put_in_order(Student *list, int n)
 
 void top_3(Student *list, int n)
 {   
-    int maxStudents = (n < 3) ? n : 3;
+    int maxStudents = (n >= 3) ? 3 : n;
 
-    for (int i = 0; i < maxStudents; i++)
-    {
-        printf ("%s\n", list[i].studentID);
-    }
+    for (int i = 0; i < maxStudents; i++) printf ("%s\n", list[i].studentID);
 }
 
 

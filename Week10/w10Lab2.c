@@ -7,8 +7,7 @@ typedef struct
 
 typedef struct 
 {
-    Point point;
-    float slope;
+    float x, y, slope;
 } Line;
 
 int is_point_on_line(float A, float B, float C, float x, float y)
@@ -21,11 +20,11 @@ int is_point_on_line(float A, float B, float C, float x, float y)
 int main(void)
 {
     Line l;
-    scanf("%f, %f, %f", &l.point.x, &l.point.y, &l.slope);
+    scanf("%f, %f, %f", &l.x, &l.y, &l.slope);
 
     float A = -l.slope;
     float B = 1;
-    float C = (l.slope * l.point.x) - l.point.y;
+    float C = (l.slope * l.x) - l.y;
 
     Point p;
     scanf("%f, %f", &p.x, &p.y);

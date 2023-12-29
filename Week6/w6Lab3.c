@@ -1,65 +1,60 @@
 #include <stdio.h>
 #include <ctype.h>
 
-int main()
+int main(void)
 {
-int c;
-int new_sentence = 1;
-int CAP_NEX_WORD = 1;
+    int c;
+    int new_sentence = 1;
+    int CAP_NEX_WORD = 1;
 
-    // Loop through each character until the end of the input
     while ((c = getchar()) != EOF)
     {
-        if (new_sentence) // If it's the start of a new sentence
+        if (new_sentence) 
         {
-            if (isalpha(c)) // If the character is a letter
+            if (isalpha(c)) 
             {
                 if (CAP_NEX_WORD)
                 {
-                    putchar(toupper(c)); // Capitalize the first letter of the word
-                    CAP_NEX_WORD = 0; // Reset flag to not capitalize the next word
+                    putchar(toupper(c)); 
+                    CAP_NEX_WORD = 0; 
                 }
 
-                else
-                {
-                    putchar(c); // Print the letter as it is
-                }
+                else putchar(c); 
 
-                new_sentence = 0; // The sentence is no longer new
+                new_sentence = 0; 
             }
                     
             else
             {
-                putchar(c); // Print the character
+                putchar(c); 
 
-                if (c == '.' || c == '!' || c == '?') // If it's a sentence-ending punctuation
+                if (c == '.' || c == '!' || c == '?') 
                 {
-                    new_sentence = 1; // Start of a new sentence
-                    CAP_NEX_WORD = 1; // Capitalize the next word
+                    new_sentence = 1; 
+                    CAP_NEX_WORD = 1; 
                 }
 
-                else if (c == '%') // If it's a special character '%'
+                else if (c == '%') 
                 {
-                    CAP_NEX_WORD = 0; // Do not capitalize the next word
+                    CAP_NEX_WORD = 0; 
                 }
             }
         }
 
-        else // If it's not the start of a new sentence
+        else
         {
-            putchar(c); // Print the character
-            if (c == '.' || c == '!' || c == '?') // If it's a sentence-ending punctuation
+            putchar(c); 
+            if (c == '.' || c == '!' || c == '?')
             {
-                new_sentence = 1; // Start of a new sentence
-                CAP_NEX_WORD = 1; // Capitalize the next word
+                new_sentence = 1; 
+                CAP_NEX_WORD = 1; 
             }
 
-            else if (c == '%') // If it's a special character '%'
+            else if (c == '%')
             {
-                CAP_NEX_WORD = 0; // Do not capitalize the next word
+                CAP_NEX_WORD = 0; 
             }
         }
     }
 
-    return 0;
 }

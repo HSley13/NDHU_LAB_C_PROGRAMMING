@@ -5,27 +5,26 @@
 
 typedef long long ll;
 
-int main() 
+int main(void) 
 {
     int C;
     scanf("%d", &C);
 
-    while (C--) {
+    while (C--) 
+    {
         int n;
-        scanf("%d", &n);//number of N coordinate pair
+        scanf("%d", &n);
 
-        ll points[N][2]; //declare 2D array to store coordinates of points in the landscape
+        ll points[N][2]; 
 
-        //input coordinates of the landscape
-        for (int i = 0; i < n; i++) scanf("%lld%lld", &points[i][0], &points[i][1]);
+        for (int i = 0; i < n; i++) scanf("%lld %lld", &points[i][0], &points[i][1]);
     
-
-        // Sorting based on x-coordinates using bubble sort
-        for (int i = 0; i < n - 1; i++) {
-            for (int j = 0; j < n - i - 1; j++) {
+        for (int i = 0; i < n - 1; i++) 
+        {
+            for (int j = 0; j < n - i - 1; j++) 
+            {
                 if (points[j][0] > points[j + 1][0]) 
                 {
-                    // Swap
                     ll temp[2];
                     temp[0] = points[j][0];
                     temp[1] = points[j][1];
@@ -40,7 +39,6 @@ int main()
         double ans = 0;
         ll k = 0;
 
-        //calculate the length of the sunny mountainsides
         for (int i = n - 2; i >= 0; i--) 
         {
             k = k > points[i + 1][1] ? k : points[i + 1][1];
@@ -53,8 +51,7 @@ int main()
             }
         }
 
-        printf("%.2lf\n", ans);//output the length of the sunny mountainsides
+        printf("%.2lf\n", ans);
     }
 
-    return 0;
 }

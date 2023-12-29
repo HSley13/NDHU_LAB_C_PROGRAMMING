@@ -17,7 +17,7 @@ void clockWiseSpiralOrder(int row, int column)
 {
     int x = 0, y = 0;
     int direction = 6; 
-    // 6 for right; 8 for down; 3 for left and 2 for up
+    // 6 for right; 8 for down; 4 for left and 2 for up
 
     for (int i = 0; i < row * column; i++)
     {
@@ -39,12 +39,12 @@ void clockWiseSpiralOrder(int row, int column)
             if (isValid(x + 1, y, row, column)) x++;
             else 
             {
-                direction = 3;
+                direction = 4;
                 y--;
             }
             break;
 
-            case 3:
+            case 4:
             if (isValid(x, y - 1, row, column)) y--;
             else 
             {

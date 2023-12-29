@@ -1,75 +1,90 @@
 #include <stdio.h>
 
-#define SIZE 1000
+#define SIZE 100
 
-typedef struct COURSES 
+typedef struct COURSES
 {
-	int sid[SIZE];
-	int studentId[SIZE];
-	int courseId[SIZE];
-	int totalScore[SIZE];
-	int numGrades[SIZE];
+    int sid;
+    int student_id;
+    int course_id;
+}COURSES;
 
-} COURSES;
-
-int numFailed(COURSES *course, int numCourses)
+typedef struct SCORES
 {
-    int failed = 0;
-    double avgScore = 0;
+    int sid;
+    int score;
+    int sid_n_score;
+}SCORES;
 
-	for (int i = 0; i < numCourses; ++i)
-	{
-		avgScore = course->totalScore[i] / (double) course->numGrades[i];
-		failed = (avgScore < 60.0)? failed + 1: failed;
-	}
-
-    return failed;
-}
-
-int numStudentCount(COURSES *course, int numCourse)
+int init_courses(COURSES *arr, int n_courses)
 {
-    int num = 0;
-    for (int i = 0; i < numCourse; i++)
+    int num_student = 0;
+    for (int i = 0; i < n_courses; i++) 
     {
-        scanf("%d %d %d", &course->sid[i], &course->studentId[i], &course->courseId[i]);
-        num++;
+        scanf("%d %d %d", &arr[i].sid, &arr[i].student_id, &arr[i].course_id);
+        num_student++;
+
 
         for (int j = 0; j < i - 1; j++)
         {
-            if (course->studentId[i] == course->studentId[j])
+            if (arr[i].student_id == arr[j].student_id)
             {
-                num--;
+                num_student--;
                 break;
             }
         }
     }
 
-    return num;
+    return num_student;
 }
+
+void init_scores(SCORES *arr, int n_scores)
+{
+    for (int i = 0; i < n_scores; i++)
+    {
+        arr[i].sid_n_score = 0;
+        
+        scanf("%d %d", &arr[i].sid, &arr[i].score);
+        arr[i].sid_n_score += 1;
+    }
+}
+
+int num_failed (SCORES *arr, int n_scores)
+{
+    int failed = 0;
+
+    for (int i = 0; i < n_scores; i++) 
+    {
+       int sum = arr[i].score;
+       
+       for (int j = i + 1; j < n_scores; j++)
+       {
+            if (arr[i].sid == arr[j].sid)
+            {
+                sum += arr[j].score;
+            }
+       }
+
+        int  avg = sum / arr[i].sid_n_score;
+        failed = (avg < 60) ? failed + 1 : failed;
+    }
+
+    return failed;
+}
+
 
 int main(void)
 {
-    int numCourses, numScores;
-    scanf("%d %d", &numCourses, &numScores);
+    int n_courses, n_scores;
+    scanf("%d %d", &n_courses, &n_scores);
 
-    COURSES course;
-    for (int i = 0; i < SIZE; i++)
-    {
-        course.totalScore[i] = 0;
-        course.numGrades[i] = 0;
-    }
+    COURSES arr1[SIZE] = {0};
+    SCORES arr2[SIZE] = {0};
 
-   int numStudent = numStudentCount(&course, numCourses);
+    int student_num = init_courses(arr1, n_courses);
+    init_scores(arr2, n_scores);
 
-    int grade, sid;
-    for (int i = 0; i < numScores; i++)
-    {
-        scanf("%d %d",&sid, &grade);
+    int failed = num_failed(arr2, n_scores);
 
-        course.totalScore[sid] += grade;
-        course.numGrades[sid]++;
-    }
-
-    printf("%d %d", numStudent, numFailed(&course, numCourses));
-
+    printf("%d %d",student_num, failed);
 }

@@ -2,7 +2,7 @@
 #include <string.h>
 #include <ctype.h>
 
-int countSubstringOccurrences(char *str, char *key) 
+int count_substring_occurrences(char *str, char *key) 
 {
     int count = 0;
     int strLen = strlen(str);
@@ -25,9 +25,5 @@ int main(void)
     char *str = s1;
     char *key = s2;
 
-    //add your code here
-    
-    printf("%d", countSubstringOccurrences(str, key) );
-    return 0;
-
+    printf("%d", count_substring_occurrences(str, key) );
 }

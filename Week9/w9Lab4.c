@@ -1,47 +1,39 @@
 #include <stdio.h>
+#include <stdlib.h>
 
-int sumIntegersInString(char *str) 
+int sum_intergers_in_string(char *str)
 {
-    int sum = 0;
-    int currentNumber = 0;
-    int isNumber = 0;
+    int sum = 0, current_number = 0, constructing_number = 0;
 
-    while (*str) 
+    while(*str)
     {
         if (isdigit(*str)) 
         {
-            currentNumber = currentNumber * 10 + (*str - '0');
-            isNumber = 1;
-        } 
+            current_number = current_number * 10 + (*str - '0');
+            constructing_number = 1;
+        }
 
         else 
         {
-            if (isNumber) 
+            if (constructing_number)
             {
-                sum += currentNumber;
-                currentNumber = 0;
-                isNumber = 0;
+                sum += current_number;
+                current_number = 0;
+                constructing_number = 0;
             }
         }
 
         str++;
     }
 
-    if (isNumber) 
-    {
-        sum += currentNumber;
-    }
-
     return sum;
 }
 
-int main() 
+int main(void)
 {
     init();
     char *str = s;
-    int result = sumIntegersInString(str);
+    int sum = sum_intergers_in_string(str);
 
-    printf("%d", result);
-
-    return 0;
+    printf("%d", sum);
 }

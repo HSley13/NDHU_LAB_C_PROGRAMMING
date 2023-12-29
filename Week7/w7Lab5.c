@@ -3,33 +3,28 @@
 
 #define SIZE 10001
 
-int main()
+int main(void)
 {
-	int rside = 0, lside = INT_MAX, i = 0, j = 0, l = 0, h = 0, r = 0;
-	int ans[SIZE]= {0};
+    int l, h, r, l_side = INT_MAX, r_side = 0;
+    int ans[SIZE] = {0};
 
-	while(scanf("%d %d %d", &l, &h, &r) == 3 && l != 0)
-	{
-		rside = (r > rside) ? r : rside;
-		lside = (l < lside) ? l : lside;
+    while (scanf("%d %d %d", &l, &h, &r) == 3 && l != 0)
+    {
+        l_side = (l_side > l) ? l : l_side;
+        r_side = (r > r_side) ? r : r_side;
 
-		for (j = l; j < r; j++)
-		{
-			if (ans[j] < h) ans[j] = h;	
-		}
-	}
+        for (int i = l; i < r; i++) ans[i] = (h  > ans[i]) ? h : ans[i];
+    }
 
-	for (i = lside; i < rside; i++)
-	{
-		if(ans[i] != ans[i-1])
-		{
-			if(ans[i] == 0) printf("%d 0 ", i);
+    for (int i = l_side; i < r_side; i++)
+    {
+        if (ans[i] != ans[i - 1])
+        {
+            if (ans[i] == 0) printf("%d 0 ", i);
+            
+            else printf("%d %d ", i, ans[i]);
+        }
+    }
 
-			else printf("%d %d ", i, ans[i]);
-		}
-	}
-  
-	printf("%d 0", rside);
-
-	return 0;
+    printf("%d 0", r_side);
 }
