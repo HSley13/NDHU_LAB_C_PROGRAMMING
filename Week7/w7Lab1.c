@@ -34,12 +34,7 @@ int main(void)
 {
     int n, m;
 
-    while(scanf("%d %d", &n, &m) == 2)
-    {
-        printf("%d %d %d\n", n, m, maxCycleCount(n, m));
-    }
-
-    return 0;
+    while(scanf("%d %d", &n, &m) == 2) printf("%d %d %d\n", n, m, maxCycleCount(n, m));
 }
 
  

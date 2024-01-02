@@ -20,10 +20,8 @@ int main(void)
 
     for (int i = 0; i < rows; i++)
     {
-        for (int j = 0; j < columns; j++)
-        {
-            printf("%d ", arr[i][j]);
-        }
+        for (int j = 0; j < columns; j++) printf("%d ", arr[i][j]);
+        
         printf("\n");
     }
 

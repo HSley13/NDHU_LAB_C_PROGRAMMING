@@ -34,10 +34,7 @@ int main(void)
                     CAP_NEX_WORD = 1; 
                 }
 
-                else if (c == '%') 
-                {
-                    CAP_NEX_WORD = 0; 
-                }
+                else if (c == '%')  CAP_NEX_WORD = 0; 
             }
         }
 
@@ -56,5 +53,4 @@ int main(void)
             }
         }
     }
-
 }

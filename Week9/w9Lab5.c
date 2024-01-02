@@ -4,17 +4,18 @@ int calculSum(int *a, int *b)
 {
     int sum = 0;
 
-    if (a != NULL  && b != NULL && a < b) 
+    if (a != NULL && b != NULL && a < b) 
     {
         for (int *p = a; p < b; p++) 
         {
             sum += *p;
         }
     } 
+
     return sum;
 }
 
-int main() 
+int main(void) 
 {
     int *a, *b;
     init(&a, &b);
@@ -22,6 +23,4 @@ int main()
     int result = calculSum(a, b);
 
     printf("%d", result);
-
-    return 0;
 }

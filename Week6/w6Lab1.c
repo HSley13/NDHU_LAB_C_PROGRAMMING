@@ -2,30 +2,28 @@
 #include <stdlib.h>
 #include <string.h>
 
-int isPrimeNumber(int number) 
+int is_prime_number(int number) 
 { 
-    for (int i = 2; i <= number / 2; i++)  
-    { 
-        if (!(number % i)) return 0; 
-    } 
+    for (int i = 2; i <= number / 2; i++) if (!(number % i)) return 0; 
 
     return 1; 
 } 
 
-void sortArr(int *arr, int n)
+void sorting_arr(int *arr, int n)
 {   
     int prime, notPrime, temp;
     for (int i = 0; i < n; i++)
     {
         for (int j = i + 1; j < n; j++)
         {
-            if ((isPrimeNumber(arr[i]) && (!isPrimeNumber(arr[j]))) || ((!isPrimeNumber(arr[i])) && isPrimeNumber(arr[j])))
+            if ((is_prime_number(arr[i]) && (!is_prime_number(arr[j]))) || ((!is_prime_number(arr[i])) && is_prime_number(arr[j])))
             {
-                if (isPrimeNumber(arr[i]))
+                if (is_prime_number(arr[i]))
                 {
                     prime = arr[i];
                     notPrime = arr[j];
                 }
+
                 else 
                 {
                     prime = arr[j];
@@ -36,7 +34,7 @@ void sortArr(int *arr, int n)
                 arr[j] = notPrime;
             }
 
-            else if (isPrimeNumber(arr[i]) && isPrimeNumber(arr[j]))
+            else if (is_prime_number(arr[i]) && is_prime_number(arr[j]))
             {
                 if (arr[i] < arr[j])
                 {
@@ -55,7 +53,6 @@ void sortArr(int *arr, int n)
                     arr[j] = temp;
                 }
             }
-            
         }
     }
 }
@@ -68,7 +65,7 @@ int main(void)
     int arr[n];
     for (int i = 0; i < n; i++) scanf("%d", &arr[i]);
     
-    sortArr(arr, n);
+    sorting_arr(arr, n);
 
     for (int i = 0; i < n; i++) printf("%d ", arr[i]);  
 }

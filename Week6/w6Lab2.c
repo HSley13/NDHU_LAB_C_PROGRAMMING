@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-void decToBin(int n) 
+void decimal_to_binary(int n) 
 { 
     int bNum[32]; 
 
@@ -22,5 +22,5 @@ int main(void)
     int n;
     scanf("%d", &n);
 
-    decToBin(n);
+    decimal_to_binary(n);
 }

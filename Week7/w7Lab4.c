@@ -20,7 +20,7 @@ int main(void)
                 {
                     if (count > n) count = 1;
 
-                    if (arr[count] > 0) num++;
+                    if (arr[count]) num++;
 
                     count++;
                 }
@@ -33,7 +33,7 @@ int main(void)
                 {
                     if (count > n) count = 1;
 
-                    if (arr[count] > 0) num++;
+                    if (arr[count]) num++;
 
                     count++;
                 }

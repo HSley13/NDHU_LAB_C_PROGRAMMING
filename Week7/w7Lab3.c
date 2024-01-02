@@ -53,5 +53,4 @@ int main(void)
 
         printf("%.2lf\n", ans);
     }
-
 }

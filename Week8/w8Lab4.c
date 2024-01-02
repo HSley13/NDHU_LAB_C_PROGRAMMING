@@ -4,16 +4,13 @@
 
 typedef struct COURSES
 {
-    int sid;
-    int student_id;
-    int course_id;
+    int sid, student_ID, course_ID;
+    
 }COURSES;
 
 typedef struct SCORES
 {
-    int sid;
-    int score;
-    int sid_n_score;
+    int sid, score, sid_n_score;
 }SCORES;
 
 int init_courses(COURSES *arr, int n_courses)
@@ -21,13 +18,12 @@ int init_courses(COURSES *arr, int n_courses)
     int num_student = 0;
     for (int i = 0; i < n_courses; i++) 
     {
-        scanf("%d %d %d", &arr[i].sid, &arr[i].student_id, &arr[i].course_id);
+        scanf("%d %d %d", &arr[i].sid, &arr[i].student_ID, &arr[i].course_ID);
         num_student++;
-
 
         for (int j = 0; j < i - 1; j++)
         {
-            if (arr[i].student_id == arr[j].student_id)
+            if (arr[i].student_ID == arr[j].student_ID)
             {
                 num_student--;
                 break;
@@ -45,7 +41,7 @@ void init_scores(SCORES *arr, int n_scores)
         arr[i].sid_n_score = 0;
         
         scanf("%d %d", &arr[i].sid, &arr[i].score);
-        arr[i].sid_n_score += 1;
+        arr[i].sid_n_score++;
     }
 }
 
@@ -59,10 +55,7 @@ int num_failed (SCORES *arr, int n_scores)
        
        for (int j = i + 1; j < n_scores; j++)
        {
-            if (arr[i].sid == arr[j].sid)
-            {
-                sum += arr[j].score;
-            }
+            if (arr[i].sid == arr[j].sid) sum += arr[j].score;
        }
 
         int  avg = sum / arr[i].sid_n_score;

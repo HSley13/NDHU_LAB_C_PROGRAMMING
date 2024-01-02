@@ -1,19 +1,18 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include <math.h>
 
 #define size 100
 int matrix[size][size] = {{0}};
 int visited[size][size] = {{0}};
 
-int isValid(int x, int y, int row, int column)
+bool is_valid(int x, int y, int row, int column)
 {
-    if (x >= 0 && x < row && y >= 0 && y < column && !visited[x][y]) return 1;
-
-    else return 0;
+    return (x >= 0 && x < row && y >= 0 && y < column && !visited[x][y]);
 }
 
-void clockWiseSpiralOrder(int row, int column)
+void clockwise_spiral_order(int row, int column)
 {
     int x = 0, y = 0;
     int direction = 6; 
@@ -27,7 +26,7 @@ void clockWiseSpiralOrder(int row, int column)
         switch (direction)
         {
             case 6:
-            if (isValid(x, y + 1, row, column)) y++;
+            if (is_valid(x, y + 1, row, column)) y++;
             else 
             {
                 direction = 8;
@@ -36,7 +35,7 @@ void clockWiseSpiralOrder(int row, int column)
             break;
 
             case 8:
-            if (isValid(x + 1, y, row, column)) x++;
+            if (is_valid(x + 1, y, row, column)) x++;
             else 
             {
                 direction = 4;
@@ -45,7 +44,7 @@ void clockWiseSpiralOrder(int row, int column)
             break;
 
             case 4:
-            if (isValid(x, y - 1, row, column)) y--;
+            if (is_valid(x, y - 1, row, column)) y--;
             else 
             {
                 direction = 2;                 
@@ -54,7 +53,7 @@ void clockWiseSpiralOrder(int row, int column)
             break;
 
             case 2:
-            if (isValid(x - 1, y, row, column)) x--;
+            if (is_valid(x - 1, y, row, column)) x--;
             else 
             {
                 direction = 6;
@@ -72,11 +71,8 @@ int main(void)
 
     for (int i = 0; i < rows; i++)
     {
-        for (int j = 0; j < columns; j++)
-        {
-            scanf("%d", &matrix[i][j]);
-        }
+        for (int j = 0; j < columns; j++) scanf("%d", &matrix[i][j]);
     }
 
-    clockWiseSpiralOrder(rows, columns);
+    clockwise_spiral_order(rows, columns);
 }

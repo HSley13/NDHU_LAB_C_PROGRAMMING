@@ -1,51 +1,48 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
 #include <string.h>
 
-int distinct(char arrString[], int i, int j) 
+bool distinct(char *arr, int i, int j)
 {
     int encountered[256] = {0};
 
-    for (int k = i; k <= j; k++) 
+    for (int k = i; k <= j; k++)
     {
-        if (encountered[arrString[k]]) return 0;
+        if (encountered[arr[k]]) return false;
 
-        encountered[arrString[k]] = 1;
+        encountered[arr[k]] = 1;
     }
-    return 1;
+
+    return true;
 }
 
-void longest_subs(char arrString[], int *start, int *end) 
+void longest_subs_string(char *arr, int *start, int *end)
 {
-    int len = strlen(arrString);
-    int longestLength = 0; 
+    int longest = 0;
+    int n = strlen(arr);
 
-    for (int i = 0; i < len; i++) 
+    for (int i = 0; i < n; i++)
     {
-        for (int j = i; j < len; j++) 
+        for (int j = i; j < n; j++)
         {
-            if (distinct(arrString, i, j) && (j - i + 1 > longestLength)) 
+            if (distinct(arr, i, j) && (j - i + 1 > longest))
             {
-                longestLength = j - i + 1;
+                longest = j - i + 1;
                 *start = i;
                 *end = j;
-            }
+            } 
         }
     }
 }
 
-int main() 
+int main(void)
 {
-    char arrString[100];
-    scanf("%s", arrString);
+    char str[1000];
+    scanf("%s", str);
 
     int start = 0, end = 0;
-    longest_subs(arrString, &start, &end);
+    longest_subs_string(str, &start, &end);
 
-    for (int i = start; i <= end; i++) 
-    {
-        printf("%c", arrString[i]);
-    }
-    printf("\n");
-    
-    return 0;
+    for (int i = start; i <= end; i++) printf ("%c", str[i]);
 }

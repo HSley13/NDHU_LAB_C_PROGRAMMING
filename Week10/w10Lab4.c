@@ -9,7 +9,7 @@ int rows = 0, cols = 0;
 
 bool in_range(int new_row, int new_column)
 {
-  return new_row >= 0 && new_row < rows && new_column >= 0 && new_column < cols;
+  return (new_row >= 0 && new_row < rows && new_column >= 0 && new_column < cols);
 }
 
 void simulated_round(char matrix[MAX_ROWS][MAX_COLS], char new_matrix[MAX_ROWS][MAX_COLS])

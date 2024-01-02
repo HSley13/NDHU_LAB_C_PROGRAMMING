@@ -43,7 +43,7 @@ char checkWinner(char board[19][20])
     return 'N';
 }
 
-int main() 
+int main(void) 
 {
     char board[19][20];
 
@@ -56,6 +56,4 @@ int main()
     else if (winner == 'X') printf("Black\n");
 
     else printf("No winner\n");
-    
-    return 0;
 }

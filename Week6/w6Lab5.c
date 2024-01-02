@@ -2,19 +2,19 @@
 #include <stdlib.h>
 #include <string.h>
 
-void decimalToRoman(int num) 
+void decimal_to_roman(int num) 
 {
-    int decimalValues[] = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
-    const char* romanSymbols[] = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
+    int decimal_value[] = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
+    const char* roman_symbol[] = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
 
-    int len = sizeof(decimalValues) / sizeof(decimalValues[0]);
+    int len = sizeof(decimal_value) / sizeof(decimal_value[0]);
 
     for (int i = 0; i < len; i++) 
     {
-        while (num >= decimalValues[i]) 
+        while (num >= decimal_value[i]) 
         {
-            printf("%s", romanSymbols[i]);
-            num -= decimalValues[i];
+            printf("%s", roman_symbol[i]);
+            num -= decimal_value[i];
         }
     }
 }
@@ -25,5 +25,5 @@ int main(void)
     int n;
     scanf("%d", &n);
     
-    decimalToRoman(n);
+    decimal_to_roman(n);
 }

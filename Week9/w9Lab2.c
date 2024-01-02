@@ -1,10 +1,9 @@
 #include <stdio.h>
 
-int main() 
+int main(void) 
 {
     int *p;
     init(&p);
 
     printf("%d, %d", p[4], p[31]);
-    return 0;
 }

@@ -22,9 +22,8 @@ void take_record(Student *list, int n)
 double average(Student *list)
 {
     double sum = list->programming + list->programmingLab + list->calculus;
-    double avg = sum / 3;
 
-    return avg;
+    return sum / 3;
 }     
 
 void put_in_order(Student *list, int n)
@@ -41,16 +40,14 @@ void put_in_order(Student *list, int n)
             }
         }
     }
-
 }
 
 void top_3(Student *list, int n)
 {   
-    int maxStudents = (n >= 3) ? 3 : n;
+    int max_student = (n >= 3) ? 3 : n;
 
-    for (int i = 0; i < maxStudents; i++) printf ("%s\n", list[i].studentID);
+    for (int i = 0; i < max_student; i++) printf ("%s\n", list[i].studentID);
 }
-
 
 int main(void)
 {
