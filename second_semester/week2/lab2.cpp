@@ -1,13 +1,32 @@
 #include <iostream>
 #include <cmath>
 
+// The class Point should be deleted when uplaoding to OJ cause it is not necessary and will only make the runtime longer which is an error for OJ
+
+class Point
+{
+private:
+    int x, y;
+
+public:
+    int getX()
+    {
+        return x;
+    }
+
+    int getY()
+    {
+        return y;
+    }
+};
+
 class Segment
 {
 private:
     Point p1, p2;
 
 public:
-    Segment(Point _p1, Point _p2) : p1(_p1), p2(_p2) {}
+    Segment(Point x1, Point x2) : p1(x1), p2(x2) {}
 
     double length()
     {
