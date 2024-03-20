@@ -3,29 +3,35 @@
 
 class find_total
 {
+private:
+    const double price = 1.2;
+    double distance;
 
 public:
-    double total_price(float KM)
-    {
-        const float price = 1.2;
-        double total;
+    find_total(double distance) : distance(distance) {}
 
-        if (KM <= 200)
-            total = (KM * price);
-
-        else if (KM > 200)
-            total = ((((KM - 200) * price) * (75.0 / 100.0)) + (200 * price));
-
-        return total;
-    }
+    double total_price();
 };
+
+double find_total::total_price()
+{
+    double total;
+
+    if (distance <= 200)
+        total = (distance * price);
+
+    else if (distance > 200)
+        total = (200 * price) + (((distance - 200) * price) * 0.75);
+
+    return total;
+}
 
 int main(void)
 {
-    float distance;
+    double distance;
     std::cin >> distance;
 
-    find_total result;
+    find_total result(distance);
 
-    std::cout << round(result.total_price(distance)) << std::endl;
+    std::cout << round(result.total_price()) << std::endl;
 }

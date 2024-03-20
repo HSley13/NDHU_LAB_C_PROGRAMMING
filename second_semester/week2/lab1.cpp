@@ -4,13 +4,24 @@
 class point
 {
 
-public:
+private:
     float x, y;
 
+public:
     point(float x, float y) : x(x), y(y) {}
+
+    float getX()
+    {
+        return x;
+    }
+
+    float getY()
+    {
+        return y;
+    }
 };
 
-int main()
+int main(void)
 {
     int n;
     std::cin >> n;
@@ -21,10 +32,11 @@ int main()
     {
         float x, y;
         std::cin >> x >> y;
+
         point p(x, y);
         points.push_back(p);
     }
 
     for (int i = 0; i < n; i++)
-        std::cout << "(" << points[i].x << ", " << points[i].y << ")" << std::endl;
+        std::cout << "(" << points[i].getX() << ", " << points[i].getY() << ")" << std::endl;
 }

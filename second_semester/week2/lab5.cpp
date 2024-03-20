@@ -8,24 +8,19 @@ private:
     int n;
 
 public:
-    four(int number)
-    {
-        n = number;
-    }
+    four(int n) : n(n) {}
 
     std::string found_or_not();
 };
 
 std::string four::found_or_not()
 {
-    int i = this->n;
-
-    while (i)
+    while (n)
     {
-        if (i % 10 == 4)
+        if (n % 10 == 4)
             return "Yes";
 
-        i /= 10;
+        n /= 10;
     }
 
     return "No";
@@ -33,13 +28,14 @@ std::string four::found_or_not()
 
 int main(void)
 {
-    int plate;
+    int plate_num;
 
-    std::cin >> plate;
+    std::cin >> plate_num;
 
-    if (plate > 0)
+    if (plate_num > 0)
     {
-        four p(plate);
+        four p(plate_num);
+
         std::cout << p.found_or_not() << std::endl;
     }
 }

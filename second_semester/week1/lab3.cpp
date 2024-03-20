@@ -7,32 +7,33 @@ class Triangle
 public:
     Point p1, p2, p3;
 
-    Triangle(Point pt1, Point pt2, Point pt3) : p1(pt1), p2(pt2), p3(pt3) {}
+    Triangle(Point p1, Point p2, Point p3) : p1(p1), p2(p2), p3(p3) {}
 
-    double distance(Point start, Point end)
-    {
-        double d1 = end.getX() - start.getX();
-        double d2 = end.getY() - start.getY();
+    double distance(Point start, Point end);
 
-        return sqrt(d1 * d1 + d2 * d2);
-    }
-
-    double perimeter()
-    {
-        double side1 = distance(p1, p2);
-        double side2 = distance(p2, p3);
-        double side3 = distance(p3, p1);
-
-        return side1 + side2 + side3;
-    }
+    double perimeter();
 };
+
+double Triangle::distance(Point start, Point end)
+{
+    return sqrt(pow(end.getX() - start.getX(), 2) + pow(end.getY() - start.getY(), 2));
+}
+
+double Triangle::perimeter()
+{
+    double side_1 = distance(p1, p2);
+    double side_2 = distance(p2, p3);
+    double side_3 = distance(p3, p1);
+
+    return side_1 + side_2 + side_3;
+}
 
 int main(void)
 {
     int N;
     std::cin >> N;
 
-    for (int i = 0; i < N; ++i)
+    for (int i = 0; i < N; i++)
     {
         double x1, y1, x2, y2, x3, y3;
 

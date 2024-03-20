@@ -4,21 +4,12 @@
 class point
 {
 
-public:
+private:
     double x;
     double y;
 
+public:
     point(double x, double y) : x(x), y(y) {}
-
-    void setX(double x)
-    {
-        this->x = x;
-    }
-
-    void setY(double y)
-    {
-        this->y = y;
-    }
 
     double getX()
     {
@@ -37,13 +28,15 @@ public:
     point start;
     point end;
 
-    double distance()
-    {
-        double dx = end.getX() - start.getX();
-        double dy = end.getY() - start.getY();
-        return sqrt(dx * dx + dy * dy);
-    }
+    Segment(point start, point end) : start(start), end(end){};
+
+    double distance();
 };
+
+double Segment::distance()
+{
+    return sqrt(pow(end.getX() - start.getX(), 2) + pow(end.getY() - start.getY(), 2));
+}
 
 int main(void)
 {
@@ -52,14 +45,16 @@ int main(void)
 
     for (int i = 0; i < N; i++)
     {
-        double startX, startY, endX, endY;
-        std::cin >> endX >> endY >> startX >> startY;
+        double start_X, start_Y, end_X, end_Y;
+        std::cin >> end_X >> end_Y >> start_X >> start_Y;
 
-        point start(startX, startY);
-        point end(endX, endY);
-        Segment segment = {start, end};
+        point start(start_X, start_Y);
+        point end(end_X, end_Y);
 
-        double dist = segment.distance();
-        std::cout << dist << std::endl;
+        Segment segment(start, end);
+
+        double distance = segment.distance();
+
+        std::cout << distance << std::endl;
     }
 }
