@@ -10,8 +10,7 @@ int count_substring_occurrences(char *str, char *key)
 
     for (int i = 0; i <= strLen - keyLen; i++) 
     {
-        if (!strncmp(str + i, key, keyLen)) count++;
-        
+        if (!strncmp(str + i, key, keyLen)) count++; 
     }
 
     return count;
