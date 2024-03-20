@@ -1,6 +1,27 @@
 #include <iostream>
 #include <cmath>
 
+// The class Point should be deleted/commented before uploading to OJ cause it's not necessary, thus OJ will judge it as a compile error
+
+class Point
+{
+private:
+    double x, y;
+
+public:
+    Point(double x, double y) : x(x), y(y) {}
+
+    double getX()
+    {
+        return x;
+    }
+
+    double getY()
+    {
+        return y;
+    }
+};
+
 class Segment
 {
 private:
