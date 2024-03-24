@@ -3,7 +3,6 @@
 
 class four
 {
-
 private:
     int n;
 

@@ -3,10 +3,8 @@
 
 class point
 {
-
 private:
-    double x;
-    double y;
+    double x, y;
 
 public:
     point(double x, double y) : x(x), y(y) {}
@@ -46,6 +44,7 @@ int main(void)
     for (int i = 0; i < N; i++)
     {
         double start_X, start_Y, end_X, end_Y;
+
         std::cin >> end_X >> end_Y >> start_X >> start_Y;
 
         point start(start_X, start_Y);
@@ -53,8 +52,6 @@ int main(void)
 
         Segment segment(start, end);
 
-        double distance = segment.distance();
-
-        std::cout << distance << std::endl;
+        std::cout << segment.distance() << std::endl;
     }
 }

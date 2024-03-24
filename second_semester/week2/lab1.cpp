@@ -3,19 +3,18 @@
 
 class point
 {
-
 private:
-    float x, y;
+    double x, y;
 
 public:
-    point(float x, float y) : x(x), y(y) {}
+    point(double x, double y) : x(x), y(y) {}
 
-    float getX()
+    double getX()
     {
         return x;
     }
 
-    float getY()
+    double getY()
     {
         return y;
     }
@@ -30,7 +29,7 @@ int main(void)
 
     for (int i = 0; i < n; i++)
     {
-        float x, y;
+        double x, y;
         std::cin >> x >> y;
 
         point p(x, y);

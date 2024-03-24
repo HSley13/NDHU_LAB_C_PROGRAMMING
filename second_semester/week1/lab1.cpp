@@ -3,9 +3,9 @@
 
 class point
 {
-
 public:
     float x, y;
+
     point(float x, float y) : x(x), y(y) {}
 };
 
