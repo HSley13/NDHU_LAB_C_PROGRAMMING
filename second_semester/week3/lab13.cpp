@@ -7,42 +7,88 @@ class matrix
 private:
     std::vector<std::vector<int>> matrix;
 
-    int n = 0;
+    int dimension = 0;
 
 public:
     void scan();
 
-    void print();
-
     void right();
 
     void left();
+
+    void print();
 };
 
 void matrix::scan()
 {
-    std::cin >> n;
+    std::cin >> dimension;
 
-    matrix.resize(n, std::vector<int>(n));
+    matrix.resize(dimension, std::vector<int>(dimension));
 
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < dimension; i++)
     {
-        for (int j = 0; j < n; j++)
+        for (int j = 0; j < dimension; j++)
             std::cin >> matrix[i][j];
+    }
+}
+
+void matrix::right()
+{
+    if (dimension == 0)
+    {
+        std::cout << "No element in matrix can be rotated.\n";
+        return;
+    }
+
+    std::vector<std::vector<int>> tmp;
+
+    tmp.resize(dimension, std::vector<int>(dimension));
+
+    for (int i = 0; i < dimension; i++)
+    {
+        for (int j = 0; j < dimension; j++)
+        {
+            tmp[i][j] = matrix[dimension - 1 - j][i];
+        }
+    }
+    matrix = tmp;
+}
+
+void matrix::left()
+{
+    if (dimension == 0)
+    {
+        std::cout << "No element in matrix can be rotated.\n";
+        return;
+    }
+
+    std::vector<std::vector<int>> tmp;
+
+    tmp.resize(dimension, std::vector<int>(dimension));
+
+    for (int t = 0; t < 3; t++)
+    {
+        for (int i = 0; i < dimension; i++)
+        {
+            for (int j = 0; j < dimension; j++)
+                tmp[i][j] = matrix[dimension - 1 - j][i];
+        }
+
+        matrix = tmp;
     }
 }
 
 void matrix::print()
 {
-    if (n == 0)
+    if (dimension == 0)
     {
         std::cout << "No element in matrix can be printed.\n";
         return;
     }
 
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < dimension; i++)
     {
-        for (int j = 0; j < n; j++)
+        for (int j = 0; j < dimension; j++)
             std::cout << matrix[i][j] << " ";
 
         std::cout << std::endl;
@@ -51,57 +97,11 @@ void matrix::print()
     std::cout << "\n";
 }
 
-void matrix::right()
-{
-    if (n == 0)
-    {
-        std::cout << "No element in matrix can be rotated.\n";
-        return;
-    }
-
-    std::vector<std::vector<int>> tmp;
-
-    tmp.resize(n, std::vector<int>(n));
-
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < n; j++)
-        {
-            tmp[i][j] = matrix[n - 1 - j][i];
-        }
-    }
-    matrix = tmp;
-}
-
-void matrix::left()
-{
-    if (n == 0)
-    {
-        std::cout << "No element in matrix can be rotated.\n";
-        return;
-    }
-
-    std::vector<std::vector<int>> tmp;
-
-    tmp.resize(n, std::vector<int>(n));
-
-    for (int t = 0; t < 3; t++)
-    {
-        for (int i = 0; i < n; i++)
-        {
-            for (int j = 0; j < n; j++)
-                tmp[i][j] = matrix[n - 1 - j][i];
-        }
-
-        matrix = tmp;
-    }
-}
-
 int main(void)
 {
     std::string str;
 
-    matrix m;
+    matrix _matrix;
 
     while (true)
     {
@@ -117,20 +117,20 @@ int main(void)
             std::cin >> str2;
 
             if (str2 == "left")
-                m.left();
+                _matrix.left();
 
             else if (str2 == "right")
-                m.right();
+                _matrix.right();
 
             else
                 std::cout << "unknown\n";
         }
 
         else if (str == "print")
-            m.print();
+            _matrix.print();
 
         else if (str == "scan")
-            m.scan();
+            _matrix.scan();
 
         else
             std::cout << "unknown\n";

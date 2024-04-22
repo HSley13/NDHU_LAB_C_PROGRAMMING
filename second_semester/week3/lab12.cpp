@@ -5,7 +5,7 @@
 const std::string num = "0123456789";
 
 class Digit
-{ // class Digit represent a digit in base 10
+{
 private:
     int digit;
 
@@ -20,7 +20,7 @@ public:
 };
 
 class Integer
-{ // class Integer represent a integer
+{
     Digit value[1000];
 
     bool sign = 0;
@@ -87,7 +87,7 @@ Integer Integer::addition(const Integer &b) const
     std::reverse(ans.begin(), ans.end());
 
     return Integer(ans);
-};
+}
 
 Integer Integer::subtraction(const Integer &b) const
 {

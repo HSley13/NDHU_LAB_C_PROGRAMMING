@@ -5,7 +5,7 @@
 class numbers
 {
 private:
-    std::vector<int> num;
+    std::vector<int> list;
 
     int n;
 
@@ -16,16 +16,16 @@ public:
 
     bool check(int a);
 
-    void procedure();
+    void next();
 };
 
 void numbers::insert()
 {
     std::cin >> n;
-    num.resize(n);
+    list.resize(n);
 
     for (int i = 0; i < n; i++)
-        std::cin >> num[i];
+        std::cin >> list[i];
 }
 
 int numbers::reverse_integer(int a)
@@ -50,19 +50,19 @@ bool numbers::check(int a)
     return check == check2;
 }
 
-void numbers::procedure()
+void numbers::next()
 {
     for (int i = 0; i < n; i++)
     {
         int count = 0;
 
-        while (count == 0 || !check(num[i]))
+        while (count == 0 || !check(list[i]))
         {
-            num[i] += reverse_integer(num[i]);
+            list[i] += reverse_integer(list[i]);
             count++;
         }
 
-        std::cout << count << " " << num[i] << std::endl;
+        std::cout << count << " " << list[i] << std::endl;
     }
 }
 
@@ -71,5 +71,6 @@ int main(void)
     numbers a;
 
     a.insert();
-    a.procedure();
+
+    a.next();
 }
