@@ -65,7 +65,7 @@ Path::Path(Segment *segments, int length)
     double sum = 0;
     int i = 0;
 
-    for (i = 0; i < length - 1; i++)
+    for (; i < length - 1; i++)
     {
         if (!same_or_not(segments[i].getEnd(1), segments[i + 1].getEnd(0)))
             break;
@@ -78,6 +78,7 @@ Path::Path(Segment *segments, int length)
         sum += segments[i].length();
 
         double length = (same_or_not(segments[i].getEnd(1), segments[0].getEnd(0))) ? -1 : sum;
+
         std::cout << length << std::endl;
     }
     else
