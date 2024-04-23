@@ -47,7 +47,7 @@ bool numbers::check(int a)
 
     std::reverse(check2.begin(), check2.end());
 
-    return check == check2;
+    return !check.compare(check2);
 }
 
 void numbers::next()

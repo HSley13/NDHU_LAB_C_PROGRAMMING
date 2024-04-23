@@ -3,20 +3,20 @@
 class Anagram : public std::string
 {
 private:
-    std::string a = "";
+    std::string _a = "";
 
 public:
-    Anagram(std::string _a);
+    Anagram(std::string a);
 
     bool operator==(const Anagram &str) const;
 };
 
-Anagram::Anagram(std::string _a)
+Anagram::Anagram(std::string a)
 {
-    for (int i = 0; i < _a.length(); i++)
+    for (const char &c : a)
     {
-        if (std::isalpha(_a[i]))
-            a += std::tolower(_a[i]);
+        if (std::isalpha(c))
+            _a += std::tolower(c);
     }
 }
 
@@ -24,27 +24,19 @@ bool Anagram::operator==(const Anagram &str) const
 {
     int tmp[26] = {0};
 
-    if (a.length() != str.a.length())
+    if (this->_a.length() != str._a.length())
         return false;
 
-    for (int i = 0; i < a.length(); i++)
-        tmp[a[i] - 'a']++;
+    for (const char &c : this->_a)
+        tmp[c - 'a']++;
 
-    for (int i = 0; i < a.length(); i++)
-        tmp[str.a[i] - 'a']--;
-
-    bool flag = 1;
-
-    for (int i = 0; i < 26; i++)
+    for (const char &c : str._a)
     {
-        if (tmp[i] != 0)
-        {
-            flag = 0;
-            break;
-        }
+        if (!tmp[c - 'a'])
+            return false;
     }
 
-    return flag;
+    return true;
 };
 
 int main(void)

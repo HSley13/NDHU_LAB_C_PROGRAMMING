@@ -1,125 +1,126 @@
 #include <iostream>
-using namespace std;
+#include <cmath>
 
 class Fraction
 {
-
 private:
     int numerator, denominator;
 
+    int gcd(int a, int b) { return b == 0 ? a : gcd(b, a % b); }
+
+    void simplify();
+
 public:
     Fraction() : numerator(0), denominator(1) {}
-    Fraction(int n, int m) : numerator(n)
+
+    Fraction(int num, int deno) : numerator(num), denominator(deno) { simplify(); }
+
+    int get_numerator() const { return numerator; }
+
+    int get_denominator() const { return denominator; }
+
+    void set_numerator(int num) { numerator = num; }
+
+    void set_denominator(int deno)
     {
-        if (m == 0)
-            throw "divided by zero";
-        denominator = m;
-        simplify();
+        if (!deno)
+            return;
+
+        denominator = deno;
     }
 
-    Fraction operator=(const Fraction &b)
-    {
-        setNumerator(b.getNumerator());
-        setDenominator(b.getDenominator());
-        simplify();
+    void display() const;
 
-        return *this;
-    }
+    Fraction operator+(const Fraction &other) const;
 
-    Fraction operator+(const Fraction &b)
-    {
-        int d = getDenominator() * b.getDenominator();
+    Fraction operator-(const Fraction &other) const;
 
-        return Fraction((d / getDenominator()) * getNumerator() +
-                            (d / b.getDenominator()) * b.getNumerator(),
-                        d);
-    }
+    Fraction operator*(const Fraction &other) const;
 
-    Fraction operator-(const Fraction &second)
-    {
-        return (*this + Fraction(-(second.getNumerator()), second.getDenominator()));
-    }
+    Fraction operator/(const Fraction &other) const;
 
-    Fraction operator*(const Fraction &b)
-    {
-        return Fraction(getNumerator() * b.getNumerator(), getDenominator() * b.getDenominator());
-    }
+    Fraction &operator=(const Fraction &other);
 
-    Fraction operator/(const Fraction &b)
-    {
-        return Fraction(getNumerator() * b.getDenominator(), getDenominator() * b.getNumerator());
-    }
-
-    bool operator==(Fraction &b)
-    {
-        return (getNumerator() == b.getNumerator() && getDenominator() == b.getDenominator());
-    }
-
-    int gcd(int a, int b)
-    {
-        return (b) ? gcd(b, a % b) : a;
-    }
-
-    int lcm(int n, int m)
-    {
-        return (n / gcd(n, m)) * m;
-    }
-
-    void simplify()
-    {
-        // Find the greatest common divisor between the numerator and the denominator
-        int n = getNumerator();
-        int d = getDenominator();
-        int g = gcd(n, d);
-        if (g)
-        {
-            setNumerator(n / g);
-            setDenominator(d / g);
-        }
-        else
-            setDenominator(1);
-    }
-
-    int getNumerator() const
-    {
-        return numerator;
-    }
-
-    int getDenominator() const
-    {
-        return denominator;
-    }
-
-    void setNumerator(int n)
-    {
-        numerator = n;
-    }
-
-    void setDenominator(int m)
-    {
-        if (m == 0)
-            throw "divided by zero";
-        denominator = m;
-    }
-
-    void display()
-    {
-        if (denominator != 1)
-            cout << "(" << numerator << "/" << denominator << ")" << endl;
-        else
-            cout << numerator << endl;
-    }
-
-    friend std::ostream &operator<<(std::ostream &out, const Fraction &f)
-    {
-        if (f.denominator != 1)
-            out << "(" << f.numerator << "/" << f.denominator << ")" << endl;
-        else
-            out << f.numerator << endl;
-        return out;
-    }
+    friend std::ostream &operator<<(std::ostream &os, const Fraction &fraction);
 };
 
-int main(void)
+void Fraction::simplify()
 {
+    if (!numerator)
+    {
+        denominator = 1;
+        return;
+    }
+
+    int common_divisor = gcd(abs(numerator), abs(denominator));
+
+    numerator /= common_divisor;
+    denominator /= common_divisor;
+}
+
+void Fraction::display() const
+{
+    if (denominator == 1)
+        std::cout << numerator;
+
+    else
+        std::cout << "(" << numerator << "/" << denominator << ")";
+}
+
+Fraction Fraction::operator+(const Fraction &other) const
+{
+    int num = (this->numerator * other.denominator) + (other.numerator * this->denominator);
+
+    int deno = this->denominator * other.denominator;
+
+    return Fraction(num, deno);
+}
+
+Fraction Fraction::operator-(const Fraction &other) const
+{
+    int num = (this->numerator * other.denominator) - (other.numerator * this->denominator);
+
+    int deno = this->denominator * other.denominator;
+
+    return Fraction(num, deno);
+}
+
+Fraction Fraction::operator*(const Fraction &other) const
+{
+    int num = numerator * other.numerator;
+
+    int denom = denominator * other.denominator;
+
+    return Fraction(num, denom);
+}
+
+Fraction Fraction::operator/(const Fraction &other) const
+{
+    int num = this->numerator * other.denominator;
+
+    int deno = this->denominator * other.numerator;
+
+    return Fraction(num, deno);
+}
+
+Fraction &Fraction::operator=(const Fraction &other)
+{
+    if (this != &other)
+    {
+        this->numerator = other.numerator;
+        this->denominator = other.denominator;
+    }
+
+    return *this;
+}
+
+std::ostream &operator<<(std::ostream &out, const Fraction &f)
+{
+    if (f.denominator == 1)
+        out << f.numerator;
+
+    else
+        out << "(" << f.numerator << "/" << f.denominator << ")";
+
+    return out;
 }

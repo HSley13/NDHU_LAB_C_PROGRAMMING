@@ -143,18 +143,18 @@ Integer Integer::subtraction(const Integer &b) const
 
 void Integer::display()
 {
-    bool is_zero = 1;
+    bool is_non_zero = 0;
 
     if (sign)
         std::cout << "-";
 
     for (int i = count - 1; i >= 0; i--)
     {
-        if (value[i].getDigit() != 0)
-            is_zero = 0;
-
-        if (value[i].getDigit() != 0 || is_zero == 0 || i == 0)
+        if (value[i].getDigit() != 0 || is_non_zero || i == 0)
+        {
             std::cout << num[value[i].getDigit()];
+            is_non_zero = 1;
+        }
     }
 }
 

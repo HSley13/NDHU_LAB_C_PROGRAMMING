@@ -1,5 +1,5 @@
 #include <iostream>
-#include <bits/stdc++.h>
+#include <cmath>
 
 class Fraction
 {
@@ -8,7 +8,6 @@ private:
 
 public:
     Fraction() : numerator(0), denominator(1) {}
-
     Fraction(int n, int m) : numerator(n)
     {
         if (m == 0)
@@ -39,69 +38,45 @@ public:
     }
 };
 
-// didn't want to write lcm but the version of oj compiler is just too old =.=
-int lcm(int a, int b)
+int gcd(int a, int b) { return b == 0 ? a : gcd(b, a % b); }
+
+void simplify(int &num, int &deno)
 {
-    return a * b / __gcd(a, b);
+    if (!num)
+    {
+        deno = 1;
+        return;
+    }
+
+    int common_divisor = gcd(abs(num), abs(deno));
+
+    num /= common_divisor;
+    deno /= common_divisor;
 }
 
-Fraction operator+(const Fraction &f, const Fraction &f2)
+Fraction operator+(const Fraction &f1, const Fraction &f2)
 {
-    int n, d, _gcd, _lcm;
+    int num = (f1.getNumerator() * f2.getDenominator()) + (f1.getDenominator() * f2.getNumerator());
 
-    _gcd = __gcd(f.getDenominator(), f2.getDenominator());
-    _lcm = lcm(f.getDenominator(), f2.getDenominator());
+    int deno = f1.getDenominator() * f2.getDenominator();
 
-    n = f.getNumerator() * (_lcm / f.getDenominator()) + f2.getNumerator() * (_lcm / f2.getDenominator());
+    simplify(num, deno);
 
-    d = _lcm;
-
-    int tmp = std::__gcd(n, d);
-    n /= tmp;
-    d /= tmp;
-
-    return Fraction(n, d);
+    return Fraction(num, deno);
 }
 
-Fraction operator-(const Fraction &f, const Fraction &f2)
+Fraction operator-(const Fraction &f1, const Fraction &f2)
 {
-    int n, d, _gcd, _lcm;
+    int num = (f1.getNumerator() * f2.getDenominator()) - (f1.getDenominator() * f2.getNumerator());
 
-    _gcd = __gcd(f.getDenominator(), f2.getDenominator());
-    _lcm = lcm(f.getDenominator(), f2.getDenominator());
+    int deno = f1.getDenominator() * f2.getDenominator();
 
-    n = f.getNumerator() * (_lcm / f.getDenominator()) - f2.getNumerator() * (_lcm / f2.getDenominator());
+    simplify(num, deno);
 
-    d = _lcm;
-
-    int tmp = __gcd(n, d);
-    n /= tmp;
-    d /= tmp;
-
-    return Fraction(n, d);
+    return Fraction(num, deno);
 }
 
-bool operator==(const Fraction &f, const Fraction &f2)
+bool operator==(const Fraction &f1, const Fraction &f2)
 {
-    int n1, n2, _gcd, _lcm;
-
-    _gcd = __gcd(f.getDenominator(), f2.getDenominator());
-    _lcm = lcm(f.getDenominator(), f2.getDenominator());
-
-    n1 = f.getNumerator() * (_lcm / f.getDenominator());
-    n2 = f2.getNumerator() * (_lcm / f2.getDenominator());
-
-    return n1 == n2;
-}
-
-int main(void)
-{
-    int n1, n2, m1, m2;
-    std::cin >> n1 >> m1 >> n2 >> m2;
-
-    Fraction f1(n1, m1), f2(n2, m2);
-
-    std::cout << (f1 + f2) << std::endl;
-    std::cout << (f1 - f2) << std::endl;
-    std::cout << (f1 == f2) << std::endl;
+    return (f1.getNumerator() / f1.getDenominator()) == (f2.getNumerator() / f2.getDenominator());
 }
