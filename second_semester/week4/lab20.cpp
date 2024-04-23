@@ -20,7 +20,7 @@ int main(void)
         for (int i = 0; i < a + 1; i++)
         {
             for (int j = 0; j < b * 2 + 1; j++)
-            { // 1 | 2 _ 3
+            {
                 if (i != a)
                 {
                     if (j & 1)
@@ -124,11 +124,3 @@ int main(void)
             std::cout << std::endl;
     }
 }
-
-/*
- _ _ _
-|_|_|_|
-|_|_|_|
-
-2*3 -> 3*7
-*/
