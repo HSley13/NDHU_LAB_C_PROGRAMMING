@@ -41,16 +41,12 @@ int main(void)
             int x, y;
         };
 
-        std::stack<p> stk;
-
-        while (!stk.empty())
-            stk.pop();
-
         p tmp;
 
         tmp.x = stx - 1;
         tmp.y = sty * 2 - 1;
 
+        std::stack<p> stk;
         stk.push(tmp);
 
         for (int count = a * b - 1; count > 0; count--)
@@ -94,6 +90,7 @@ int main(void)
             {
                 int num;
                 std::cin >> num;
+
                 for (int i = 0; i < num; i++)
                     stk.pop();
 
