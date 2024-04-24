@@ -63,7 +63,5 @@ int Date::count_days(const Date &date) const
 
 int Date::operator-(const Date &other) const
 {
-    int total_days_other = other.count_days(other);
-
     return abs(this->count_days(*this) - other.count_days(other));
 }
