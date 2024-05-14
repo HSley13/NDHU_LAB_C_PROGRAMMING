@@ -13,7 +13,7 @@ int find_distance(const Point &p1, const Point &p2)
     return abs(p1.x - p2.x) + abs(p1.y - p2.y);
 }
 
-Point find_meeting_point(int S, int A, int F, const std::vector<Point> &FRIENDS)
+Point find_meeting_point(int S, int A, const std::vector<Point> &FRIENDS)
 {
     int min_total_distance = std::numeric_limits<int>::max();
 
@@ -56,7 +56,7 @@ int main(void)
         for (Point &friend_loc : FRIENDS)
             std::cin >> friend_loc.x >> friend_loc.y;
 
-        Point meeting_point = find_meeting_point(S, A, F, FRIENDS);
+        Point meeting_point = find_meeting_point(S, A, FRIENDS);
 
         std::cout << "(Street: " << meeting_point.x << ", Avenue: " << meeting_point.y << ")" << std::endl;
     }
